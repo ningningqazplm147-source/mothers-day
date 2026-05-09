@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>亲爱的妈沫儿~母亲节快乐</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow-x:hidden;
+    font-family:"Microsoft YaHei",sans-serif;
+    background:
+    radial-gradient(circle at top,#ffe3ec 0%,#ffd4e3 35%,#ffc2d6 70%,#ffb3cb 100%);
+    min-height:100vh;
+    color:#fff;
+}
+
+/* 星空粒子背景 */
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:0;
+}
+
+.star{
+    position:absolute;
+    border-radius:50%;
+    background:white;
+    opacity:.8;
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+/* 飘落爱心 */
+.heart{
+    position:fixed;
+    top:-10vh;
+    font-size:24px;
+    animation:fall linear forwards;
+    z-index:1;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(120vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* 主容器 */
+.container{
+    position:relative;
+    z-index:2;
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+/* 卡片 */
+.card{
+    width:100%;
+    max-width:900px;
+    padding:50px;
+    border-radius:35px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(18px);
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.15),
+    inset 0 0 20px rgba(255,255,255,0.2);
+    text-align:center;
+    animation:fadeUp 1.8s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+/* 柔光 */
+.card::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:rgba(255,255,255,0.2);
+    border-radius:50%;
+    top:-120px;
+    left:-100px;
+    filter:blur(40px);
+}
+
+.card::after{
+    content:"";
+    position:absolute;
+    width:240px;
+    height:240px;
+    background:rgba(255,255,255,0.15);
+    border-radius:50%;
+    bottom:-100px;
+    right:-80px;
+    filter:blur(40px);
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(60px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.title{
+    font-size:60px;
+    margin-bottom:20px;
+    font-weight:bold;
+    text-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.subtitle{
+    font-size:24px;
+    margin-bottom:40px;
+    opacity:.95;
+}
+
+.message{
+    font-size:24px;
+    line-height:2;
+    margin-bottom:40px;
+}
+
+/* 照片区域 */
+.photos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:40px;
+}
+
+.photo{
+    height:240px;
+    border-radius:24px;
+    overflow:hidden;
+    position:relative;
+    transform:rotate(-2deg);
+    transition:.5s;
+    background:#fff;
+    padding:10px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.photo:nth-child(2){
+    transform:rotate(2deg);
+}
+
+.photo:nth-child(3){
+    transform:rotate(-3deg);
+}
+
+.photo:hover{
+    transform:scale(1.05) rotate(0deg);
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+/* 按钮 */
+.btn-group{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.btn{
+    border:none;
+    padding:16px 34px;
+    border-radius:999px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+    font-weight:bold;
+}
+
+.primary{
+    background:white;
+    color:#ff4f87;
+}
+
+.primary:hover{
+    transform:translateY(-5px) scale(1.05);
+}
+
+.secondary{
+    background:rgba(255,255,255,0.2);
+    color:white;
+    border:1px solid rgba(255,255,255,0.4);
+}
+
+.secondary:hover{
+    transform:translateY(-5px);
+    background:rgba(255,255,255,0.3);
+}
+
+/* 底部 */
+.footer{
+    margin-top:50px;
+    font-size:18px;
+    opacity:.9;
+}
+
+/* 点击特效 */
+.spark{
+    position:absolute;
+    pointer-events:none;
+    animation:sparkMove 1s forwards;
+}
+
+@keyframes sparkMove{
+    to{
+        transform:translateY(-80px) scale(1.5);
+        opacity:0;
+    }
+}
+
+/* 手机适配 */
+@media(max-width:768px){
+
+    .card{
+        padding:35px 25px;
+    }
+
+    .title{
+        font-size:38px;
+    }
+
+    .subtitle{
+        font-size:18px;
+    }
+
+    .message{
+        font-size:18px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+    <div class="card">
+
+        <div style="font-size:60px;">🌸</div>
+
+        <div class="title">
+            全世界最好的妈沫儿~母亲节快乐
+        </div>
+
+        <div class="subtitle">
+            Mother's Day · 永远爱您
+        </div>
+
+        <div class="message" id="typingText"></div>
+
+        <div class="btn-group">
+            <button class="btn primary" onclick="showLove()">
+                点我收下祝福 💖
+            </button>
+
+            <button class="btn secondary" onclick="releaseHearts()">
+                放烟花 ✨
+            </button>
+        </div>
+
+        <!-- 这里替换成你自己的照片 -->
+        <div class="photos">
+
+            <div class="photo">
+                <img src="mom1.jpg" />
+            </div>
+
+            <div class="photo">
+                <img src="mom2.jpg" />
+            </div>
+
+            <div class="photo">
+                <img src="mom3.jpg" />
+            </div>
+
+        </div>
+
+        <div class="footer">
+            ❤️ 愿岁月温柔以待，愿您永远平安健康、幸福快乐 ❤️
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 背景音乐 -->
+<audio id="bgm" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+    document.body.addEventListener("click", function () {
+
+    const music = document.getElementById("bgm");
+
+    music.play();
+
+}, { once: true });
+
+/* 打字机文字 */
+const text = `
+从前，总是不懂事惹您生气。
+
+谢谢您一直以来的付出、
+包容与温柔。
+
+谢谢您一直陪着我，
+支持我，
+照顾我。
+
+希望未来的日子里，
+您能够多一点轻松，
+多一点快乐。
+
+妈妈，我永远爱您 ❤️
+`;
+
+let i = 0;
+function typing(){
+    if(i < text.length){
+        document.getElementById("typingText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing,60);
+    }
+}
+typing();
+
+/* 星空 */
+for(let i=0;i<80;i++){
+
+    const star=document.createElement("div");
+    star.className="star";
+
+    star.style.width=Math.random()*4+"px";
+    star.style.height=star.style.width;
+
+    star.style.left=Math.random()*100+"vw";
+    star.style.top=Math.random()*100+"vh";
+
+    star.style.animationDelay=Math.random()*3+"s";
+
+    document.getElementById("stars").appendChild(star);
+}
+
+/* 飘心 */
+function createHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    const emojis=["💖","💕","🌸","❤️","🌷"];
+
+    heart.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+
+    heart.style.left=Math.random()*100+"vw";
+
+    heart.style.fontSize=(20+Math.random()*25)+"px";
+
+    heart.style.animationDuration=(5+Math.random()*4)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },9000);
+}
+
+setInterval(createHeart,400);
+
+/* 点击祝福 */
+function showLove(){
+
+    const messages=[
+        "妈妈辛苦啦 ❤️",
+        "愿您天天开心 🌸",
+        "永远爱您 💖",
+        "您是世界上最温柔的人 ✨"
+    ];
+
+    alert(messages[Math.floor(Math.random()*messages.length)]);
+}
+
+/* 烟花爱心 */
+function releaseHearts(){
+
+    for(let i=0;i<40;i++){
+
+        setTimeout(()=>{
+
+            const heart=document.createElement("div");
+
+            heart.innerHTML=["💖","✨","💕","🌸"][Math.floor(Math.random()*4)];
+
+            heart.style.position="fixed";
+
+            heart.style.left="50%";
+            heart.style.top="50%";
+
+            heart.style.fontSize=(20+Math.random()*40)+"px";
+
+            heart.style.pointerEvents="none";
+
+            const x=(Math.random()-0.5)*800;
+            const y=(Math.random()-0.5)*800;
+
+            heart.style.transition="1.5s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(()=>{
+                heart.style.transform=`translate(${x}px,${y}px)`;
+                heart.style.opacity="0";
+            },10);
+
+            setTimeout(()=>{
+                heart.remove();
+            },1600);
+
+        },i*40);
+    }
+}
+
+/* 点击出现爱心 */
+document.addEventListener("click",(e)=>{
+
+    const spark=document.createElement("div");
+
+    spark.className="spark";
+    spark.innerHTML="💗";
+
+    spark.style.left=e.pageX+"px";
+    spark.style.top=e.pageY+"px";
+    spark.style.fontSize="28px";
+
+    document.body.appendChild(spark);
+
+    setTimeout(()=>{
+        spark.remove();
+    },1000);
+
+});
+
+</script>
+
+</body>
+</html>
+</body>
+</html>
