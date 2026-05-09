@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>亲爱的妈沫儿~母亲节快乐</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -24,39 +22,33 @@ body{
 }
 
 /* 星空背景 */
-
 .stars{
     position:fixed;
     width:100%;
     height:100%;
     z-index:1;
+    pointer-events:none;
 }
 
 .star{
     position:absolute;
+    width:3px;
+    height:3px;
     background:white;
     border-radius:50%;
-    opacity:.8;
     animation:twinkle 3s infinite;
 }
 
 @keyframes twinkle{
-    0%,100%{
-        opacity:.2;
-        transform:scale(1);
-    }
-    50%{
-        opacity:1;
-        transform:scale(1.6);
-    }
+    0%,100%{opacity:.2;}
+    50%{opacity:1;}
 }
 
 /* 飘落装饰 */
-
-.heart{
+.floating{
     position:fixed;
     top:-10vh;
-    z-index:9999;
+    z-index:30;
     pointer-events:none;
     animation:fall linear forwards;
 }
@@ -69,135 +61,119 @@ body{
 }
 
 /* 主容器 */
-
 .container{
     position:relative;
     z-index:10;
     width:100%;
-    min-height:100vh;
     display:flex;
     justify-content:center;
-    align-items:center;
     padding:40px 20px;
 }
 
 /* 卡片 */
-
 .card{
     width:100%;
-    max-width:950px;
-    padding:50px;
+    max-width:900px;
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(14px);
     border-radius:35px;
-
-    background:rgba(255,255,255,0.15);
-
-    backdrop-filter:blur(18px);
-
-    box-shadow:
-    0 8px 32px rgba(0,0,0,0.15),
-    inset 0 0 20px rgba(255,255,255,0.2);
-
+    padding:50px 35px;
     text-align:center;
-
+    box-shadow:0 10px 40px rgba(0,0,0,.15);
     position:relative;
-
-    overflow:visible;
-
-    animation:fadeUp 1.5s ease;
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(60px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    overflow:hidden;
 }
 
 .title{
     font-size:58px;
     font-weight:bold;
-    margin-bottom:20px;
-    text-shadow:0 4px 10px rgba(0,0,0,0.15);
+    line-height:1.3;
+    margin-top:10px;
+    text-shadow:0 5px 10px rgba(0,0,0,.12);
 }
 
 .subtitle{
+    margin-top:20px;
     font-size:24px;
-    margin-bottom:35px;
+    opacity:.95;
 }
 
 .message{
+    margin-top:35px;
     font-size:24px;
     line-height:2;
-    margin-bottom:35px;
+    white-space:pre-line;
 }
 
-/* 信封 */
-
-.envelope-area{
-    margin:35px auto;
-    perspective:1000px;
+/* 信封区域 */
+.envelope-wrap{
+    display:flex;
+    justify-content:center;
+    margin:50px 0 20px;
+    position:relative;
+    z-index:20;
 }
 
 .envelope{
-    width:220px;
-    height:140px;
-    margin:auto;
     position:relative;
+    width:260px;
+    height:180px;
     cursor:pointer;
-    transition:1s;
 }
 
-.envelope-top{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:#ff7aa8;
-    clip-path:polygon(0 0,100% 0,50% 55%);
-    transform-origin:top;
-    transition:1s;
-    z-index:3;
-}
-
+/* 信封主体 */
 .envelope-body{
     position:absolute;
     width:100%;
     height:100%;
-    background:#ff94b8;
-    border-radius:0 0 12px 12px;
+    background:#f58ab0;
+    border-radius:12px;
+    z-index:2;
 }
 
+/* 信封盖 */
+.envelope-top{
+    position:absolute;
+    width:100%;
+    height:120px;
+    background:#ff74a5;
+    clip-path:polygon(0 100%,50% 0,100% 100%);
+    transform-origin:top;
+    transition:1s;
+    z-index:4;
+}
+
+/* 信件 */
 .letter{
     position:absolute;
-    width:90%;
-    height:120px;
+    width:88%;
+    left:6%;
+    top:20px;
     background:white;
-    left:5%;
-    top:10px;
-    border-radius:12px;
-    padding:15px;
-    color:#ff5f92;
-    font-size:15px;
+    color:#ff5a92;
+    border-radius:16px;
+    padding:25px 20px;
+    font-size:18px;
     line-height:1.8;
+    text-align:left;
     transition:1s;
     z-index:1;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
+/* 打开状态 */
 .envelope.open .envelope-top{
     transform:rotateX(180deg);
 }
 
 .envelope.open .letter{
-    transform:translateY(-100px);
+    transform:translateY(-170px);
+    z-index:10;
 }
 
 /* 按钮 */
-
 .btn-group{
-    margin-top:35px;
+    margin-top:30px;
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
@@ -210,8 +186,8 @@ body{
     border-radius:999px;
     font-size:18px;
     cursor:pointer;
-    transition:.3s;
     font-weight:bold;
+    transition:.3s;
 }
 
 .primary{
@@ -220,85 +196,68 @@ body{
 }
 
 .secondary{
-    background:rgba(255,255,255,0.2);
+    background:rgba(255,255,255,.2);
+    border:1px solid rgba(255,255,255,.4);
     color:white;
-    border:1px solid rgba(255,255,255,0.4);
 }
 
 .btn:hover{
-    transform:translateY(-5px) scale(1.05);
+    transform:translateY(-4px) scale(1.05);
 }
 
-/* 轮播相册 */
-
+/* 轮播 */
 .slider{
     width:100%;
+    max-width:720px;
+    margin:50px auto 0;
+    position:relative;
     overflow:hidden;
-    margin-top:45px;
+    border-radius:28px;
+    z-index:10;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    background:white;
+    padding:8px;
 }
 
 .slides{
     display:flex;
-    width:300%;
-    animation:slide 15s infinite;
+    transition:1s;
 }
 
 .slide{
-    width:100%;
-    flex-shrink:0;
-    padding:10px;
+    min-width:100%;
+    height:450px;
+    overflow:hidden;
+    border-radius:20px;
 }
 
 .slide img{
     width:100%;
-    max-height:450px;
-    object-fit:cover;
-    border-radius:28px;
-    border:8px solid rgba(255,255,255,.8);
-    box-shadow:0 12px 25px rgba(0,0,0,.2);
+    height:100%;
+    object-fit:contain;
+    background:#fff;
 }
 
-@keyframes slide{
-
-    0%{
-        transform:translateX(0);
-    }
-
-    30%{
-        transform:translateX(0);
-    }
-
-    35%{
-        transform:translateX(-100%);
-    }
-
-    65%{
-        transform:translateX(-100%);
-    }
-
-    70%{
-        transform:translateX(-200%);
-    }
-
-    100%{
-        transform:translateX(-200%);
-    }
-
-}
-
-/* 底部 */
-
+/* footer */
 .footer{
-    margin-top:40px;
+    margin-top:45px;
     font-size:18px;
 }
 
-/* 点击爱心 */
+/* 烟花 */
+.firework{
+    position:fixed;
+    z-index:9999;
+    pointer-events:none;
+    font-size:28px;
+    transition:1.5s;
+}
 
+/* 点击爱心 */
 .spark{
     position:fixed;
+    z-index:9999;
     pointer-events:none;
-    z-index:99999;
     animation:sparkMove 1s forwards;
 }
 
@@ -309,12 +268,11 @@ body{
     }
 }
 
-/* 手机适配 */
-
+/* 手机 */
 @media(max-width:768px){
 
     .card{
-        padding:35px 20px;
+        padding:35px 22px;
     }
 
     .title{
@@ -329,12 +287,15 @@ body{
         font-size:18px;
     }
 
-    .slide img{
-        max-height:320px;
+    .slide{
+        height:320px;
+    }
+
+    .envelope{
+        transform:scale(.9);
     }
 
 }
-
 </style>
 </head>
 
@@ -356,30 +317,48 @@ body{
 Mother's Day · 永远爱您
 </div>
 
-<div class="message" id="typingText"></div>
+<div class="message">
+从前，总是不懂事惹您生气。
+
+谢谢您一直以来的付出、
+包容与温柔。
+
+谢谢您一直陪着我，
+支持我，
+照顾我。
+
+希望未来的日子里，
+您能够多一点轻松，
+多一点快乐。
+
+妈妈，我永远爱您 ❤️
+</div>
 
 <!-- 信封 -->
-
-<div class="envelope-area">
+<div class="envelope-wrap">
 
 <div class="envelope" id="envelope" onclick="openEnvelope()">
+
+<div class="letter">
+亲爱的妈妈：
+
+谢谢您一直以来的爱与照顾。
+
+愿您永远健康快乐，
+每天都能开开心心。
+
+母亲节快乐 ❤️
+</div>
 
 <div class="envelope-top"></div>
 
 <div class="envelope-body"></div>
-
-<div class="letter">
-妈妈辛苦啦 ❤️<br>
-愿您永远开心健康<br>
-永远被爱包围 🌸
-</div>
 
 </div>
 
 </div>
 
 <!-- 按钮 -->
-
 <div class="btn-group">
 
 <button class="btn primary" onclick="showLove()">
@@ -392,11 +371,10 @@ Mother's Day · 永远爱您
 
 </div>
 
-<!-- 轮播相册 -->
-
+<!-- 轮播 -->
 <div class="slider">
 
-<div class="slides">
+<div class="slides" id="slides">
 
 <div class="slide">
 <img src="mom1.jpg">
@@ -419,70 +397,36 @@ Mother's Day · 永远爱您
 </div>
 
 </div>
-
 </div>
 
 <!-- 音乐 -->
-
 <audio id="bgm" loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* 点击播放音乐 */
-
+/* 微信点击播放音乐 */
 document.body.addEventListener("click",function(){
 
-    document.getElementById("bgm").play();
+    const music=document.getElementById("bgm");
+
+    music.play();
 
 },{once:true});
 
-/* 打字机 */
+/* 打开信封 */
+function openEnvelope(){
 
-const text=`
-从前，总是不懂事惹您生气。
-
-谢谢您一直以来的付出、
-包容与温柔。
-
-谢谢您一直陪着我，
-支持我，
-照顾我。
-
-希望未来的日子里，
-您能够多一点轻松，
-多一点快乐。
-
-妈妈，我永远爱您 ❤️
-`;
-
-let i=0;
-
-function typing(){
-
-    if(i<text.length){
-
-        document.getElementById("typingText").innerHTML+=text.charAt(i);
-
-        i++;
-
-        setTimeout(typing,60);
-    }
+    document.getElementById("envelope").classList.toggle("open");
 }
 
-typing();
-
 /* 星空 */
-
 for(let i=0;i<80;i++){
 
     const star=document.createElement("div");
 
     star.className="star";
-
-    star.style.width=Math.random()*4+"px";
-    star.style.height=star.style.width;
 
     star.style.left=Math.random()*100+"vw";
     star.style.top=Math.random()*100+"vh";
@@ -493,96 +437,81 @@ for(let i=0;i<80;i++){
 }
 
 /* 飘落装饰 */
+function createFloating(){
 
-function createHeart(){
+    const el=document.createElement("div");
 
-    const heart=document.createElement("div");
+    el.className="floating";
 
-    heart.className="heart";
+    const arr=["💖","🌸","✨","💕"];
 
-    const arr=["💖","💕","🌸","✨","❤️"];
+    el.innerHTML=arr[Math.floor(Math.random()*arr.length)];
 
-    heart.innerHTML=arr[Math.floor(Math.random()*arr.length)];
+    el.style.left=Math.random()*100+"vw";
 
-    heart.style.left=Math.random()*100+"vw";
+    el.style.fontSize=(20+Math.random()*20)+"px";
 
-    heart.style.fontSize=(20+Math.random()*30)+"px";
+    el.style.animationDuration=(6+Math.random()*5)+"s";
 
-    heart.style.animationDuration=(5+Math.random()*5)+"s";
-
-    document.body.appendChild(heart);
+    document.body.appendChild(el);
 
     setTimeout(()=>{
-        heart.remove();
-    },10000);
+        el.remove();
+    },12000);
 }
 
-setInterval(createHeart,400);
+setInterval(createFloating,500);
 
 /* 祝福 */
-
 function showLove(){
 
-    const messages=[
+    const arr=[
         "妈妈辛苦啦 ❤️",
-        "愿您天天开心 🌸",
         "永远爱您 💖",
+        "愿您天天开心 🌸",
         "您是世界上最温柔的人 ✨"
     ];
 
-    alert(messages[Math.floor(Math.random()*messages.length)]);
+    alert(arr[Math.floor(Math.random()*arr.length)]);
 }
 
 /* 烟花 */
-
 function releaseHearts(){
 
-    for(let i=0;i<60;i++){
+    for(let i=0;i<50;i++){
 
         setTimeout(()=>{
 
             const heart=document.createElement("div");
 
-            heart.innerHTML=["💖","✨","💕","🌸","❤️"][Math.floor(Math.random()*5)];
+            heart.className="firework";
 
-            heart.style.position="fixed";
+            const arr=["💖","✨","💕","🌸"];
+
+            heart.innerHTML=arr[Math.floor(Math.random()*arr.length)];
 
             heart.style.left="50%";
             heart.style.top="50%";
 
-            heart.style.fontSize=(20+Math.random()*40)+"px";
-
-            heart.style.pointerEvents="none";
-
-            heart.style.zIndex="99999";
-
-            const x=(Math.random()-0.5)*1200;
-            const y=(Math.random()-0.5)*1200;
-
-            heart.style.transition="1.5s";
+            const x=(Math.random()-0.5)*900;
+            const y=(Math.random()-0.5)*700;
 
             document.body.appendChild(heart);
 
             setTimeout(()=>{
-
-                heart.style.transform=`translate(${x}px,${y}px)`;
-
+                heart.style.transform=`translate(${x}px,${y}px) scale(1.8)`;
                 heart.style.opacity="0";
-
-            },10);
+            },20);
 
             setTimeout(()=>{
                 heart.remove();
             },1600);
 
-        },i*30);
-
+        },i*35);
     }
-
 }
 
 /* 点击爱心 */
-
 document.addEventListener("click",(e)=>{
 
     const spark=document.createElement("div");
@@ -592,7 +521,6 @@ document.addEventListener("click",(e)=>{
     spark.innerHTML="💗";
 
     spark.style.left=e.pageX+"px";
-
     spark.style.top=e.pageY+"px";
 
     spark.style.fontSize="28px";
@@ -605,13 +533,21 @@ document.addEventListener("click",(e)=>{
 
 });
 
-/* 信封展开 */
+/* 轮播 */
+let index=0;
 
-function openEnvelope(){
+setInterval(()=>{
 
-    document.getElementById("envelope").classList.toggle("open");
+    index++;
 
-}
+    if(index>2){
+        index=0;
+    }
+
+    document.getElementById("slides").style.transform=
+    `translateX(-${index*100}%)`;
+
+},3000);
 
 </script>
 
